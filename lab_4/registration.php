@@ -1,3 +1,9 @@
+<?php
+    if(isset($_GET['errors'])){
+        $errors = json_decode($_GET["errors"], true);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +15,34 @@
 </head>
 <body>
     <div class="w-50 m-auto border-0">
-        <form action="done.php" method="POST">
+        <form action="validate.php" method="POST">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" name="email">
+            <?php
+                if(isset($errors['email']))
+                    echo "<span style='color:red'>{$errors['email']}</span>"
+             ?>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="text" class="form-control" id="password" name="password">
+        </div>
         <div class="mb-3">
             <label for="firstName" class="form-label">First Name</label>
             <input type="text" class="form-control" id="firstName" name="firstName">
+            <?php
+                if(isset($errors['firstName']))
+                    echo "<span style='color:red'>{$errors['firstName']}</span>"
+             ?>
         </div>
         <div class="mb-3">
             <label for="lastName" class="form-label">Last Name</label>
             <input type="text" class="form-control" id="lastName" name="lastName">
+            <?php
+                if(isset($errors['lastName']))
+                    echo "<span style='color:red'>{$errors['lastName']}</span>"
+             ?>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
@@ -28,7 +54,6 @@
                 <option value="USA">USA</option>
                 <option value="Canada">Canada</option>
                 <option value="UK">UK</option>
-                <!-- Add more options as needed -->
             </select>
         </div>
         <div class="mb-3">
